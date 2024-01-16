@@ -9,7 +9,7 @@
                     "type": "object",
                     "properties": {
                         "deviceMemoryScaling": {
-                            "type": "integer"
+                            "type": "number"
                         },
                         "deviceSplitCount": {
                             "type": "integer"

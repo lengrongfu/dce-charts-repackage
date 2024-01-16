@@ -1,0 +1,15 @@
+# child values
+vgpu:
+  scheduler:
+    serviceMonitor:
+      enable: false
+  devicePlugin:
+    deviceSplitCount: 10
+    deviceMemoryScaling: 1.0
+  resources:
+    limits:
+      cpu: 500m
+      memory: 720Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
