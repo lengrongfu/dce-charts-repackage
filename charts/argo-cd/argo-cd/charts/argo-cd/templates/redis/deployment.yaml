@@ -13,6 +13,9 @@ metadata:
   namespace: {{ include  "argo-cd.namespace" . }}
   labels:
     {{- include "argo-cd.labels" (dict "context" . "component" .Values.redis.name "name" .Values.redis.name) | nindent 4 }}
+    {{- with (mergeOverwrite (deepCopy .Values.global.deploymentLabels) .Values.redis.deploymentLabels) }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   replicas: 1
   revisionHistoryLimit: {{ .Values.global.revisionHistoryLimit }}
@@ -33,6 +36,9 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      {{- with .Values.redis.runtimeClassName | default .Values.global.runtimeClassName }}
+      runtimeClassName: {{ . }}
+      {{- end }}
       {{- with .Values.redis.imagePullSecrets | default .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
